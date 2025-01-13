@@ -15,13 +15,15 @@ namespace InheritanceLab
         public ProductTypes ProductType { get; }
         public float Price { get; } // Can only be assigned to in a constructor in this class
 
-        public InventoryItem(String title, String brand, int quantity, ProductTypes productType, float price)
+        public List<String> MiscAttributes { get; }
+        public InventoryItem(Categorizer.Product product)
         {
-            Title = title;
-            Brand = brand;
-            Quantity = quantity;
-            ProductType = productType;
-            Price = price;
+            Title = product.title;
+            Brand = product.brand;
+            Quantity = product.quantityOnHand;
+            ProductType = product.productType;
+            Price = product.price;
+            MiscAttributes = product.miscAttributes;
         }
         public virtual void DisplayItem()
         {

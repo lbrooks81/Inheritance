@@ -10,15 +10,14 @@ namespace InheritanceLab
     public class Laptop : ITDevice
     { 
         public String ScreenSize { get; set; }
-        public Laptop(String title, String brand, int quantity, ProductTypes productType, float price, 
-            String resolution, String screenSize, String storage, String ram, String cpu)
-            : base(title, brand, quantity, productType, price)
+        public Laptop(Categorizer.Product product)
+            : base(product)
         {
-            Resolution = resolution;
-            ScreenSize = screenSize;
-            Storage = storage;
-            RAMSize = ram;
-            CPU = cpu;
+            Resolution = product.miscAttributes[0];
+            ScreenSize = product.miscAttributes[1];
+            Storage = product.miscAttributes[2];
+            RAMSize = product.miscAttributes[3];
+            CPU = product.miscAttributes[4];
         }
 
         public override void DisplayItem()
@@ -27,21 +26,19 @@ namespace InheritanceLab
             Console.WriteLine($" Screen Size: {ScreenSize}");
             Console.Write(Environment.NewLine);
         }
-        //TODO: Finish this class. Hint: it needs a constructor and its unique properties.
     }
 
     public class Smartphone : ITDevice
     {
         public String CameraResolution { get; set; }
-        public Smartphone(String title, String brand, int quantity, ProductTypes productType, float price, 
-            String resolution, String storage, String ram, String cpu, String cameraResolution)
-            : base(title, brand, quantity, productType, price)
+        public Smartphone(Categorizer.Product product)
+            : base(product)
         {
-            Resolution = resolution;
-            Storage = storage;
-            RAMSize = ram;
-            CPU = cpu;
-            CameraResolution = resolution;
+            Resolution = product.miscAttributes[0];
+            Storage = product.miscAttributes[1];
+            RAMSize = product.miscAttributes[2];
+            CPU = product.miscAttributes[3];
+            CameraResolution = product.miscAttributes[4];
         }
 
         public override void DisplayItem()
@@ -50,7 +47,6 @@ namespace InheritanceLab
             Console.WriteLine($" Camera Resolution: {CameraResolution}");
             Console.Write(Environment.NewLine);
         }
-        //TODO: Finish this class. Hint: it needs a constructor and its unique properties.
     }
 
     public class RoboticVacuum : InventoryItem
@@ -59,15 +55,13 @@ namespace InheritanceLab
         public bool Bagless { get; set; }
         public String Color { get; set; }
         public String Weight { get; set; }
-        public RoboticVacuum(String title, String brand, int quantity, ProductTypes productType, float price,
-            String cleaningPathWidth, bool bagless, String color, String weight) 
-            : base(title, brand, quantity, productType, price)
+        public RoboticVacuum(Categorizer.Product product) 
+            : base(product)
         {
-
-            CleaningPathWidth = cleaningPathWidth;
-            Bagless = bagless;
-            Color = color;
-            Weight = weight;
+            CleaningPathWidth = product.miscAttributes[0];
+            Bagless = product.miscAttributes[1] == "yes" ? true : false; ;
+            Color = product.miscAttributes[2];
+            Weight = product.miscAttributes[3];
         }
 
         public override void DisplayItem()
@@ -76,7 +70,6 @@ namespace InheritanceLab
             Console.WriteLine($" Cleaning Path Width: {CleaningPathWidth}\n Bagless: {Bagless}\n Color: {Color}\n Weight: {Weight}");
             Console.Write(Environment.NewLine);
         }
-        //TODO: Finish this class. Hint: it needs a constructor and its unique properties.
     }
 
     public class Camera : InventoryItem
@@ -84,13 +77,12 @@ namespace InheritanceLab
         public String ImageSensorType { get; set; }
         public String EffectivePixels { get; set; }
         public String VideoResolution { get; set; }
-        public Camera(String title, String brand, int quantity, ProductTypes productType, float price,
-            String imageSensorType, String effectivePixels, String videoResolution) 
-            : base(title, brand, quantity, productType, price)
+        public Camera(Categorizer.Product product) 
+            : base(product)
         {
-            ImageSensorType = imageSensorType;
-            EffectivePixels = effectivePixels;
-            VideoResolution = videoResolution;
+            ImageSensorType = product.miscAttributes[0];
+            EffectivePixels = product.miscAttributes[1];
+            VideoResolution = product.miscAttributes[2];
         }
         public override void DisplayItem()
         {
@@ -98,7 +90,6 @@ namespace InheritanceLab
             Console.WriteLine($" Image Sensor Type: {ImageSensorType}\n Effective Pixels: {EffectivePixels}\n Video Resolution: {VideoResolution}");
             Console.Write(Environment.NewLine);
         }
-        //TODO: Finish this class. Hint: it needs a constructor and its unique properties.
     }
 
     public class AirFryer : InventoryItem
@@ -107,13 +98,12 @@ namespace InheritanceLab
         public String Color { get; set; }
         public String[] Functions { get; set; }
 
-        public AirFryer(String title, String brand, int quantity, ProductTypes productType, float price, 
-            bool nonStick, String color, String[] functions) 
-            : base(title, brand, quantity, productType, price)
+        public AirFryer(Categorizer.Product product) 
+            : base(product)
         {
-            NonStick = nonStick;
-            Color = color;
-            Functions = functions;
+            NonStick = product.miscAttributes[0] == "yes" ? true : false;
+            Color = product.miscAttributes[1];
+            Functions = product.miscAttributes[2].Split('/');
         }
 
         public override void DisplayItem()
@@ -122,6 +112,6 @@ namespace InheritanceLab
             Console.WriteLine($" NonStick Interior: {NonStick}\n Color: {Color}\n Functions: {String.Join(", ", Functions)}");
             Console.Write(Environment.NewLine);
         }
-        //TODO: Finish this class. Hint: it needs a constructor and its unique properties.
-    }
+    } 
+
 }

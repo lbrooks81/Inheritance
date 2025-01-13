@@ -10,8 +10,8 @@ namespace InheritanceLab
    
     public abstract class ITDevice : InventoryItem
     {
-        protected ITDevice(String title, String brand, int quantity, ProductTypes productType, float price)
-            : base(title, brand, quantity, productType, price){}
+        protected ITDevice(Categorizer.Product product)
+            : base(product){}
         public String? Resolution { get; set; }
         public String Storage { get; set; }
         public String RAMSize { get; set; }

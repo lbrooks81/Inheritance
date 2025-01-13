@@ -15,44 +15,38 @@ namespace InheritanceLab
     {
         //Add inventory items here after they are created
         public static List<InventoryItem> InventoryItems { get; private set; } = [];
-
+        public record Product(String title, String brand, int quantityOnHand, 
+            ProductTypes productType, float price, List<String> miscAttributes);
+        
         public static void Creator(ProductTypes productType, String brand, 
             String title, int quantityOnHand, float price, List<String> miscAttributes)
         {
-            String[] attributes = miscAttributes.ToArray();
+            Product product = new(title, brand, quantityOnHand, productType, price, miscAttributes);
+
             switch (productType)
             {
                 case ProductTypes.Laptop:       
-                    Laptop laptop = new Laptop(title, brand, quantityOnHand, ProductTypes.Laptop, 
-                        price, attributes[0], attributes[1], attributes[2], attributes[3], attributes[4]);
-                    // TODO get each element in miscAttributes as a property in the constructor
+                    Laptop laptop = new Laptop(product);
                     InventoryItems.Add(laptop);
                     break;
                 case ProductTypes.Smartphone:
-                    Smartphone smartphone = new Smartphone(title, brand, quantityOnHand, ProductTypes.Smartphone,
-                        price, attributes[0], attributes[1], attributes[2], attributes[3], attributes[4]);
+                    Smartphone smartphone = new Smartphone(product);
                     InventoryItems.Add(smartphone);
                     break;
                 case ProductTypes.RoboticVacuum:
-                    bool bagless = attributes[1] == "yes" ? true : false;
-                    RoboticVacuum roboticVacuum = new RoboticVacuum(title, brand, quantityOnHand, ProductTypes.RoboticVacuum,
-                        price, attributes[0], bagless, attributes[2], attributes[3]);
+                    RoboticVacuum roboticVacuum = new RoboticVacuum(product);
                     InventoryItems.Add(roboticVacuum);
                     break;
                 case ProductTypes.Camera:
-                    Camera camera = new Camera(title, brand, quantityOnHand, ProductTypes.Camera,
-                        price, attributes[0], attributes[1], attributes[2]);
+                    Camera camera = new Camera(product);
                     InventoryItems.Add(camera);
                     break;
                 case ProductTypes.AirFryer:
-                    String[] functions = attributes[2].Split('/');
-                    bool nonStick = attributes[0] == "yes" ? true : false;
-                    AirFryer airFryer = new AirFryer(title, brand, quantityOnHand, ProductTypes.AirFryer,
-                        price, nonStick, attributes[1], functions);
+                    
+                    AirFryer airFryer = new AirFryer(product);
                     InventoryItems.Add(airFryer);
                     break;
             }
-            //TODO: Create new objects based on the productType and store them in the InventoryItems list
         }
     }
 }
